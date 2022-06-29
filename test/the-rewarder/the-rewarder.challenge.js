@@ -103,10 +103,11 @@ describe("[Challenge] The rewarder", function () {
     this.exploit = await FlashLoanerPoolExploitFactory.deploy(
       this.flashLoanPool.address,
       this.rewarderPool.address,
-      this.liquidityToken.address
+      this.liquidityToken.address,
+      this.rewardToken.address,
     );
-    await this.exploit.start(0);
     await ethers.provider.send("evm_increaseTime", [5 * 24 * 60 * 60]); // 5 day
+    await this.exploit.start(0);
     await this.exploit.withdraw();
   });
 
